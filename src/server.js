@@ -10,8 +10,10 @@ class Server {
         this.app = express();
         this.PORT = process.env.PORT;
 
-        this.getMongooseConnectionOnline();
+        //this.getMongooseConnectionOnline();
         this.getServerConnection();
+
+        this.routes();
     }
     
     async getMongooseConnectionOnline(){
@@ -27,6 +29,10 @@ class Server {
             console.log("***********************************************".bgGreen)
             console.log()
         })
+    }
+
+    routes(){
+        this.app.use("/user", require("./routes/user.route") );
     }
 }
 
