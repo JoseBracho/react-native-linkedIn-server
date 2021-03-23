@@ -12,10 +12,14 @@ class Server {
 
         //this.getMongooseConnectionOnline();
         this.getServerConnection();
-
+        this.middleWare();
         this.routes();
     }
     
+    middleWare(){
+        this.app.use(express.static("public"))
+    }
+
     async getMongooseConnectionOnline(){
         await dbConnection();
     }
@@ -30,7 +34,6 @@ class Server {
             console.log()
         })
     }
-
     routes(){
         this.app.use("/user", require("./routes/user.route") );
     }
