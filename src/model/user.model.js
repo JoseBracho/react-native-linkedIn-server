@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const {Schema, model} = mongoose
 
-const userShema = new Schema({
+const userSchema = new Schema({
     name:{
         type: String,
         required: true
@@ -17,4 +17,9 @@ const userShema = new Schema({
     }
 })
 
-module.exports = model("users", userShema);
+userSchema.methods.toJSON = function () {
+    const {password, ...user} = this.toObject();
+    return user;
+}
+
+module.exports = model("users", userSchema);
