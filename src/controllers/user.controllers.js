@@ -1,7 +1,8 @@
 const {request, response} = require("express");
 
 const userRegister = (req = request, res = response) => {
-    res.send("Register!")
+    const body = req.body;
+    res.json(body)
 }
 
 const userAuth = (req = request, res = response) => {

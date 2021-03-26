@@ -6,7 +6,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    userName: {
+    userName:{
         type:String,
         unique: true,
         required: true
@@ -14,6 +14,28 @@ const userSchema = new Schema({
     password:{
         type: String,
         required: true
+    },
+    email:{
+        type:  String,
+        unique: true
+    },
+    phone:{
+        type: String
+    },
+    job:{
+        type: String
+    },
+    education:{
+        type: String
+    },
+    sex:{
+        type: String
+    },
+    description:{
+        type: String
+    },
+    img:{
+        type: String
     }
 })
 

@@ -7,6 +7,12 @@ const {
   userAuth,
   userInfo,
 } = require("../controllers/user.controllers");
+const {
+  userNameValidator,
+  passwordValidator,
+  nameValidator,
+  emailValidator,
+} = require("../helpers/dbValidator");
 const validatefields = require("../middleware/validatefields");
 
 const route = Router();
@@ -14,20 +20,25 @@ const route = Router();
 route.post(
   "/register",
   [
-    check("userName", "You must enter the userName").not().isEmpty(),
     check("name", "You must enter the name").not().isEmpty(),
-    check("password","the password must be greater than 6 characters").isLength({ min: 6 }),
+    check("name").custom(nameValidator),
+    check("userName", "You must enter the userName").not().isEmpty(),
+    check("userName").custom(userNameValidator),
+    check("password").custom(passwordValidator),
+    check("email", "You must enter the email").not().isEmpty(),
+    check("email").custom(emailValidator),
     validatefields,
   ],
   userRegister
 );
 route.post(
-  "/auth", 
+  "/auth",
   [
     check("userName", "You must enter the userName").not().isEmpty(),
-    check("password","the password must be greater than 6 characters").isLength({ min: 6 }),
+    check("userName").custom(userNameValidator),
+    check("password").custom(passwordValidator),
     validatefields,
-  ], 
+  ],
   userAuth
 );
 route.get("/profile/:id", [validatefields], userInfo);

@@ -17,7 +17,9 @@ class Server {
     }
     
     middleWare(){
-        this.app.use(express.static("public"))
+        this.app.use(express.static("public"));
+        this.app.use(express.urlencoded({extended: false}));
+        this.app.use(express.json());
     }
 
     async getMongooseConnectionOnline(){
