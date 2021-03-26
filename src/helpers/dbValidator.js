@@ -37,9 +37,29 @@ const emailValidator = async (email = "") => {
         throw new Error("Email already exists");
     }
 }
+const userLoginValidator = async (userName = "") =>{
+    const user = await User.findOne( { userName } );
+    if(userName === ""){
+        return
+    }
+    if(!user){
+        throw new Error("The username or password is incorrect");
+    }
+}
+const emailLoginValidator = async (email = "") =>{
+    const user = await User.findOne( { email } );
+    if(email === ""){
+        return
+    }
+    if(!user){
+        throw new Error("The username or password is incorrect");
+    }
+}
 module.exports = {
     userNameValidator,
     passwordValidator,
     nameValidator,
-    emailValidator
+    emailValidator,
+    userLoginValidator,
+    emailLoginValidator
 }
