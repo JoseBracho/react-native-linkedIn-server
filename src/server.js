@@ -10,7 +10,7 @@ class Server {
         this.app = express();
         this.PORT = process.env.PORT;
 
-        this.getMongooseConnectionOnline();
+        //this.getMongooseConnectionOnline();
         this.getServerConnection();
         this.middleWare();
         this.routes();
@@ -30,7 +30,7 @@ class Server {
             console.log()
             console.log("***********************************************".bgGreen)
             console.log()
-            console.log("           ",` Server on PORT ${this.PORT} `.bgCyan);
+            console.log("           ",` Server on PORT ${this.PORT} `.bgCyan.black);
             console.log()
             console.log("***********************************************".bgGreen)
             console.log()
