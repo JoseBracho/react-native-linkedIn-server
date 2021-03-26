@@ -10,7 +10,7 @@ class Server {
         this.app = express();
         this.PORT = process.env.PORT;
 
-        //this.getMongooseConnectionOnline();
+        this.getMongooseConnectionOnline();
         this.getServerConnection();
         this.middleWare();
         this.routes();
@@ -37,7 +37,7 @@ class Server {
         })
     }
     routes(){
-        this.app.use("/user", require("./routes/user.route") );
+        this.app.use("/user/auth", require("./routes/user.route") );
     }
 }
 

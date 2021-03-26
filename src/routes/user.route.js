@@ -4,7 +4,7 @@ const { check } = require("express-validator");
 const {
   userRegister,
   userUpdate,
-  userAuth,
+  userLogin,
   userInfo,
 } = require("../controllers/user.controllers");
 const {
@@ -21,25 +21,23 @@ route.post(
   "/register",
   [
     check("name", "You must enter the name").not().isEmpty(),
-    check("name").custom(nameValidator),
     check("userName", "You must enter the userName").not().isEmpty(),
+    check("password", "You must enter the password").not().isEmpty(),
+    check("email", "You must enter the email").not().isEmpty(),
+    check("name").custom(nameValidator),
     check("userName").custom(userNameValidator),
     check("password").custom(passwordValidator),
-    check("email", "You must enter the email").not().isEmpty(),
     check("email").custom(emailValidator),
     validatefields,
   ],
   userRegister
 );
 route.post(
-  "/auth",
+  "/login",
   [
-    check("userName", "You must enter the userName").not().isEmpty(),
-    check("userName").custom(userNameValidator),
-    check("password").custom(passwordValidator),
     validatefields,
   ],
-  userAuth
+  userLogin
 );
 route.get("/profile/:id", [validatefields], userInfo);
 route.put("/update", [validatefields], userUpdate);

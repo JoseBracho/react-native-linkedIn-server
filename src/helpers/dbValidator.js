@@ -14,10 +14,10 @@ const userNameValidator = async (userName = "") => {
     if(validating){
         throw new Error("Invalid username: Blanks are not accepted");
     }
-    /*const user = await User.findOne( { userName } );
+    const user = await User.findOne( { userName } );
     if(user){
         throw new Error("UserName already exists");
-    }*/
+    }
 }
 const passwordValidator = async (password = "") => {
     const phrase = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{5,}/);
@@ -32,10 +32,10 @@ const emailValidator = async (email = "") => {
     if(!validating){
         throw new Error("Invalid email");
     } 
-    /*const user = await User.findOne( { email } );
+    const user = await User.findOne( { email } );
     if(user){
         throw new Error("Email already exists");
-    }*/
+    }
 }
 module.exports = {
     userNameValidator,
