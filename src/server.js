@@ -2,6 +2,7 @@ require("dotenv").config();
 require("colors");
 
 const express = require("express");
+const cors = require("cors");
 
 const dbConnection = require("./db/config"); 
 
@@ -19,6 +20,7 @@ class Server {
     middleWare(){
         this.app.use(express.static("public"));
         this.app.use(express.urlencoded({extended: false}));
+        this.app.use(cors());
         this.app.use(express.json());
     }
 
