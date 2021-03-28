@@ -5,7 +5,7 @@ const validatefields = (req = request, res = response, next) => {
     const err = validationResult(req);
     if(!err.isEmpty()){
         const {errors} = err
-        return res.status(400).json({error:errors[0]?.msg})
+        return res.status(400).json({done: false, error:errors[0]?.msg})
     }
     next();
 }
