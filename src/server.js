@@ -40,6 +40,7 @@ class Server {
     }
     routes(){
         this.app.use("/user/auth", require("./routes/auth.route") );
+        this.app.use("/user/profile", require("./routes/user.route"))
     }
 }
 

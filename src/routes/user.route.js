@@ -11,7 +11,7 @@ const validatefields = require("../middleware/validatefields");
 const route = Router();
 
 
-route.get("/profile/:id", [validatefields], userInfo);
-route.put("/update", [validatefields], userUpdate);
+route.get("/:id", [validatefields], userInfo);
+route.put("/update/:id", [validatefields], userUpdate);
 
 module.exports = route;
