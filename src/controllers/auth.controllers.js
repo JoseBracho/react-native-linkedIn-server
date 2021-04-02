@@ -11,7 +11,7 @@ const userRegister = (req = request, res = response) => {
   });
   user.save((err, userDB) => {
     if (err) {
-      console.log(err) //Do not delete this line in case an error occurs to see the log
+      console.log(err); //Do not delete this line in case an error occurs to see the log
       res.status(500).json({
         done: false,
         error: "Communicate with the programmer: joseluisbracho0@gmail.com",
@@ -36,11 +36,11 @@ const userLogin = async (req = request, res = response) => {
     const validatePassword = bcrypt.compareSync(password, user.password);
     if (!validatePassword) {
       return res.status(400).json({
-        done:false,
+        done: false,
         error: "The username or password is incorrect",
       });
     }
-    res.json({done: true, id:user._id});
+    res.json({ done: true, id: user._id });
   } catch (err) {
     return res.status(400).json({
       done: false,
