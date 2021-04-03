@@ -5,14 +5,16 @@ const route = Router();
 
 const { userUpdate, userInfo } = require("../controllers/user.controllers");
 
-const { nameValidator, emailUpdate, userNameValidator } = require("../helpers/dbValidator");
+const { nameUpdate, emailUpdate, userNameValidator } = require("../helpers/dbValidator");
 const validatefields = require("../middleware/validatefields");
+const validateToken = require("../middleware/validateToken");
 
-route.get("/:id", [validatefields], userInfo);
+route.get("/", [validateToken], userInfo);
 route.put(
-  "/update/:id",
-  [ 
-    check("name").custom(nameValidator),
+  "/update/",
+  [
+    validateToken, 
+    check("name").custom(nameUpdate),
     check("userName").custom(userNameValidator),
     check("email").custom(emailUpdate),
     validatefields

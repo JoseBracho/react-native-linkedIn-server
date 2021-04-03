@@ -2,6 +2,7 @@ const { request, response } = require("express");
 const bcrypt = require("bcrypt");
 
 const User = require("../model/user.model");
+const generateJsonwebtoken = require("../helpers/generateJsonwebtoken");
 
 const userRegister = (req = request, res = response) => {
   let body = req.body;
@@ -40,7 +41,8 @@ const userLogin = async (req = request, res = response) => {
         error: "The username or password is incorrect",
       });
     }
-    res.json({ done: true, id: user._id });
+    let token = await generateJsonwebtoken(user._id)
+    res.json({ done: true, token });
   } catch (err) {
     return res.status(400).json({
       done: false,

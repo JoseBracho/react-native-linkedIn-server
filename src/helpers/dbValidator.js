@@ -62,7 +62,7 @@ const emailLoginValidator = async (email = "") =>{
 const emailUpdate = async (email = "") =>{
     const phrase = new RegExp(/^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[c-o-m]{3,}))$/);
     const validating = phrase.test(email);
-    if(!validating){
+    if(!validating && email != ""){
         throw new Error("Invalid email");
     }
     if(email.length > 4){
@@ -73,6 +73,15 @@ const emailUpdate = async (email = "") =>{
     }  
     return true
 }
+const nameUpdate = async (name = "") => {
+    const phrase = new RegExp(/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/);
+    const validating = phrase.test(name);
+    if(!validating && name != ""){
+        throw new Error("Invalid name");
+    }else{
+        return true;
+    }
+}
 module.exports = {
     userNameValidator,
     passwordValidator,
@@ -80,5 +89,6 @@ module.exports = {
     emailValidator,
     userLoginValidator,
     emailLoginValidator,
-    emailUpdate
+    emailUpdate,
+    nameUpdate
 }
