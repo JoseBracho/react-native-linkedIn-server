@@ -4,13 +4,13 @@ const bcrypt = require("bcrypt");
 const User = require("../model/user.model");
 const generateJsonwebtoken = require("../helpers/generateJsonwebtoken");
 
-const userRegister = (req = request, res = response) => {
+const userRegister = async (req = request, res = response) => {
   let body = req.body;
   let user = new User({
     ...body,
     password: bcrypt.hashSync(body.password, 10),
   });
-  user.save((err, userDB) => {
+  await user.save((err, userDB) => {
     if (err) {
       console.log(err); //Do not delete this line in case an error occurs to see the log
       res.status(500).json({
