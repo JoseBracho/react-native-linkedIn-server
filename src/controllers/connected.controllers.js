@@ -2,6 +2,18 @@ const { response, request } = require("express");
 
 const Connected = require("../model/connected.model");
 
+const connected = async (req = request , res = response) => {
+    const query = {receiver: req.id, is_accepted : true};
+    const [total, connect] = await Promise.all([
+        Connected.countDocuments(query),
+        Connected.find(query).populate("sender",["name","img"])
+      ]);
+    res.json({
+        total,
+        connect
+    })
+}
+
 const send = (req = request, res = response) => {
   const id = req.id;
   const body = req.body;
@@ -50,18 +62,6 @@ const agree =  (req = request, res = response) => {
         })
     })
 };
-
-const connected = async (req = request , res = response) => {
-    const query = {receiver: req.id, is_accepted : true};
-    const [total, connect] = await Promise.all([
-        Connected.countDocuments(query),
-        Connected.find(query).populate("sender",["name","img"])
-      ]);
-    res.json({
-        total,
-        connect
-    })
-}
 
 const deleteConnected = (req = request, res = response) => {
     const id = req.params.id;
