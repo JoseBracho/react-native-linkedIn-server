@@ -2,8 +2,9 @@ const {Schema, model} = require("mongoose");
 
 const ConnectedSchema = new Schema({
     receiver:{ 
-        type: String,
-        reqired: true
+        type: Schema.Types.ObjectId,
+        ref: "users",
+        required: true
     },
     sender: {
         type: Schema.Types.ObjectId,

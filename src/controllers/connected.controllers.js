@@ -2,6 +2,7 @@ const { response, request } = require("express");
 
 const Connected = require("../model/connected.model");
 
+
 const connected = async (req = request , res = response) => {
     const query = {receiver: req.id, is_accepted : true};
     const [total, connect] = await Promise.all([
@@ -13,13 +14,10 @@ const connected = async (req = request , res = response) => {
         connect
     })
 }
-
 const send = (req = request, res = response) => {
   const id = req.id;
   const body = req.body;
-
   const connected = new Connected({ receiver: body.receiver, sender: id });
-
   connected.save((err, connecteDB) => {
     if (err) {
       return res.status(500).json({
@@ -30,10 +28,8 @@ const send = (req = request, res = response) => {
     res.json(connecteDB);
   });
 };
-
 const received = async (req = request, res = response) => {
   const query = {receiver: req.id, is_accepted: false};
-  
   const [total, sender] = await Promise.all([
       Connected.countDocuments(query),
       Connected.find(query).populate("sender",["name","img"])
@@ -43,11 +39,9 @@ const received = async (req = request, res = response) => {
       sender
   })
 }
-
 const agree =  (req = request, res = response) => {
     const id = req.params.id;
-    const update = {is_accepted : true}
-
+    const update = {is_accepted : true};
     Connected.findByIdAndUpdate(id, update, (err, connectDB) => {
         if (err) {
             console.log(err); //Do not delete this line in case an error occurs to see the log
@@ -62,10 +56,8 @@ const agree =  (req = request, res = response) => {
         })
     })
 };
-
 const deleteConnected = (req = request, res = response) => {
     const id = req.params.id;
-
     Connected.findByIdAndDelete(id, (err, connectDB) => {
         if (err) {
             console.log(err); //Do not delete this line in case an error occurs to see the log
@@ -82,9 +74,9 @@ const deleteConnected = (req = request, res = response) => {
 }
 
 module.exports = {
+  connected,
   send,
   received,
   agree,
-  connected,
   deleteConnected
 };
