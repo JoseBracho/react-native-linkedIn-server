@@ -5,7 +5,10 @@ const postsSchema = new Schema({
   text_post: String,
   img_post: String,
   video_post: String,
-  shared: String,
+  shared: {
+    type: Schema.Types.ObjectId,
+    ref: "posts",
+  },
   userId: {
     type: Schema.Types.ObjectId,
     ref: "users",
